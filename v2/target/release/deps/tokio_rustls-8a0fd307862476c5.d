@@ -1,0 +1,11 @@
+C:\esp-projects\v2\target\release\deps\tokio_rustls-8a0fd307862476c5.d: C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\lib.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\client.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\common\mod.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\common\handshake.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\server.rs
+
+C:\esp-projects\v2\target\release\deps\libtokio_rustls-8a0fd307862476c5.rlib: C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\lib.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\client.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\common\mod.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\common\handshake.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\server.rs
+
+C:\esp-projects\v2\target\release\deps\libtokio_rustls-8a0fd307862476c5.rmeta: C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\lib.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\client.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\common\mod.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\common\handshake.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\server.rs
+
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\lib.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\client.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\common\mod.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\common\handshake.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\tokio-rustls-0.24.1\src\server.rs:

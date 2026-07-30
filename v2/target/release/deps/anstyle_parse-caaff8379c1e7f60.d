@@ -1,0 +1,11 @@
+C:\esp-projects\v2\target\release\deps\anstyle_parse-caaff8379c1e7f60.d: C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\lib.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\params.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\mod.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\definitions.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\table.rs
+
+C:\esp-projects\v2\target\release\deps\libanstyle_parse-caaff8379c1e7f60.rlib: C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\lib.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\params.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\mod.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\definitions.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\table.rs
+
+C:\esp-projects\v2\target\release\deps\libanstyle_parse-caaff8379c1e7f60.rmeta: C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\lib.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\params.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\mod.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\definitions.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\table.rs
+
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\lib.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\params.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\mod.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\definitions.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\anstyle-parse-1.0.0\src\state\table.rs:

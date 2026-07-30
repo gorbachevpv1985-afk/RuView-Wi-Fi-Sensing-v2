@@ -11,3 +11,4 @@ string(STRIP "${PROJECT_VER}" PROJECT_VER)
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
 project(esp32-csi-node VERSION ${PROJECT_VER})
+include_directories(components/led_strip/include) 

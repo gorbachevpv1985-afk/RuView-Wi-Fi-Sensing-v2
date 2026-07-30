@@ -4,7 +4,7 @@
 //! - Receives ESP32 CSI frames via UDP (port 5005)
 //! - Processes signals using RuVector-powered wifi-densepose-signal crate
 //! - Broadcasts sensing updates via WebSocket (ws://localhost:8765/ws/sensing)
-//! - Serves the static UI files (port 8080)
+//! - Serves the static UI files (port 8095)
 //!
 //! Replaces both ws_server.py and the Python HTTP server.
 #![allow(dead_code)]
@@ -85,7 +85,7 @@ use wifi_densepose_signal::ruvsense::pose_tracker::PoseTracker;
 #[command(name = "sensing-server", about = "WiFi-DensePose sensing server")]
 struct Args {
     /// HTTP port for UI and REST API
-    #[arg(long, default_value = "8080")]
+    #[arg(long, default_value = "8095")]
     http_port: u16,
 
     /// WebSocket port for sensing stream
@@ -8093,7 +8093,7 @@ async fn main() {
         // ADR-272 FIX: this router had NO auth layer at all. `/ws/sensing` and
         // `/ws/field` on the dedicated WS port accepted unauthenticated
         // upgrades even with auth ON — and this is the port the UI actually
-        // uses (ui/services/sensing.service.js maps HTTP 8080 -> WS 8765), so
+        // uses (ui/services/sensing.service.js maps HTTP 8095 -> WS 8765), so
         // gating only the HTTP port protected a path the browser never takes.
         // Applied AFTER the merge so it covers the RuField routes too.
         // AuthState shares its TicketStore via Arc, so a ticket minted at

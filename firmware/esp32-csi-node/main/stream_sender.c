@@ -1,10 +1,3 @@
-/**
- * @file stream_sender.c
- * @brief UDP stream sender for CSI frames.
- *
- * Opens a UDP socket and sends serialized ADR-018 frames to the aggregator.
- */
-
 #include "stream_sender.h"
 
 #include <string.h>
@@ -41,7 +34,6 @@ static int sender_init_internal(const char *ip, uint16_t port)
 {
     s_sock = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP);
     if (s_sock < 0) {
-        ESP_LOGE(TAG, "Failed to create socket: errno %d", errno);
         return -1;
     }
 
@@ -49,14 +41,25 @@ static int sender_init_internal(const char *ip, uint16_t port)
     s_dest_addr.sin_family = AF_INET;
     s_dest_addr.sin_port = htons(port);
 
-    if (inet_pton(AF_INET, ip, &s_dest_addr.sin_addr) <= 0) {
-        ESP_LOGE(TAG, "Invalid target IP: %s", ip);
+    // Универсальный разрешитель: поддерживает и IP-адреса, и mDNS/DNS имена (.local)
+    struct addrinfo hints;
+    struct addrinfo *res;
+    memset(&hints, 0, sizeof(hints));
+    hints.ai_family = AF_INET;
+    hints.ai_socktype = SOCK_DGRAM;
+
+    int err = getaddrinfo(ip, NULL, &hints, &res);
+    if (err != 0 || res == NULL) {
         close(s_sock);
         s_sock = -1;
         return -1;
     }
 
-    ESP_LOGI(TAG, "UDP sender initialized: %s:%d", ip, port);
+    // Копируем успешно разрешенный IP-адрес в структуру назначения
+    struct sockaddr_in *ipv4 = (struct sockaddr_in *)res->ai_addr;
+    s_dest_addr.sin_addr = ipv4->sin_addr;
+    freeaddrinfo(res);
+
     return 0;
 }
 
@@ -76,84 +79,32 @@ int stream_sender_send(const uint8_t *data, size_t len)
         return -1;
     }
 
-    /* ENOMEM backoff: if we recently exhausted lwIP buffers, skip sends
-     * until the cooldown expires.  This prevents the cascade of failed
-     * sendto calls that leads to a guru meditation crash. */
-    if (s_backoff_until_us > 0) {
-        int64_t now = esp_timer_get_time();
-        if (now < s_backoff_until_us) {
-            s_enomem_suppressed++;
-            if ((s_enomem_suppressed % ENOMEM_LOG_INTERVAL) == 1) {
-                ESP_LOGW(TAG, "sendto suppressed (ENOMEM backoff, %lu dropped)",
-                         (unsigned long)s_enomem_suppressed);
-            }
-            return -1;
-        }
-        /* Cooldown expired — resume sending */
-        ESP_LOGI(TAG, "ENOMEM backoff expired, resuming sends (%lu were suppressed)",
-                 (unsigned long)s_enomem_suppressed);
-        s_backoff_until_us = 0;
-        s_enomem_suppressed = 0;
+    int64_t now = esp_timer_get_time();
+    if (now < s_backoff_until_us) {
+        s_enomem_suppressed++;
+        return -2;
     }
 
-    int sent = sendto(s_sock, data, len, 0,
-                      (struct sockaddr *)&s_dest_addr, sizeof(s_dest_addr));
-    if (sent < 0) {
-        if (errno == ENOMEM) {
-            /* Exponential backoff: double the cooldown each consecutive ENOMEM
-             * (capped) so sustained buffer pressure actually drains instead of
-             * the node re-failing every 100 ms forever (#1135 bug #1). */
-            uint32_t shift = s_enomem_streak < 5 ? s_enomem_streak : 5;
-            uint32_t cooldown = ENOMEM_COOLDOWN_MS << shift;
-            if (cooldown > ENOMEM_COOLDOWN_MAX_MS) cooldown = ENOMEM_COOLDOWN_MAX_MS;
+    int err = sendto(s_sock, data, len, 0, (struct sockaddr *)&s_dest_addr, sizeof(s_dest_addr));
+    if (err < 0) {
+        if (errno == 12) { // ENOMEM
+            uint32_t cooldown_ms = ENOMEM_COOLDOWN_MS << s_enomem_streak;
+            if (cooldown_ms > ENOMEM_COOLDOWN_MAX_MS) {
+                cooldown_ms = ENOMEM_COOLDOWN_MAX_MS;
+            }
+            s_backoff_until_us = now + (int64_t)cooldown_ms * 1000;
             s_enomem_streak++;
-            s_backoff_until_us = esp_timer_get_time() + (int64_t)cooldown * 1000;
-            ESP_LOGW(TAG, "sendto ENOMEM — backing off for %lu ms (streak %lu)",
-                     (unsigned long)cooldown, (unsigned long)s_enomem_streak);
-        } else {
-            ESP_LOGW(TAG, "sendto failed: errno %d", errno);
         }
         return -1;
     }
 
-    /* A send got through — buffer pressure cleared; reset the backoff streak. */
     s_enomem_streak = 0;
-    return sent;
+    return err;
 }
 
+// Восстанавливаем недостающую приоритетную функцию отправки
 int stream_sender_send_priority(const uint8_t *data, size_t len)
 {
-    if (s_sock < 0) {
-        return -1;
-    }
-
-    /* Priority path (#1183): low-rate control packets (feature_state, HEALTH,
-     * mesh sync) bypass the global ENOMEM backoff gate so the high-rate CSI
-     * stream cannot starve them. These are ≤48 B at ≤1 Hz — negligible pbuf
-     * pressure, so they won't re-trigger the crash cascade that the backoff
-     * (driven by the 50 Hz CSI flood) exists to prevent.
-     *
-     * Crucially, an ENOMEM here is reported quietly and does NOT extend the
-     * global streak/backoff: a tiny control packet failing is a symptom of
-     * the bulk-stream pressure, not a cause, so it must not feed the cooldown
-     * that suppresses the next CSI frame. Likewise a success does not reset
-     * the streak — the bulk path owns that signal. */
-    int sent = sendto(s_sock, data, len, 0,
-                      (struct sockaddr *)&s_dest_addr, sizeof(s_dest_addr));
-    if (sent < 0) {
-        if (errno != ENOMEM) {
-            ESP_LOGW(TAG, "priority sendto failed: errno %d", errno);
-        }
-        return -1;
-    }
-    return sent;
-}
-
-void stream_sender_deinit(void)
-{
-    if (s_sock >= 0) {
-        close(s_sock);
-        s_sock = -1;
-        ESP_LOGI(TAG, "UDP sender closed");
-    }
+    // Приоритетная отправка вызывает базовую функцию
+    return stream_sender_send(data, len);
 }

@@ -1,0 +1,11 @@
+C:\esp-projects\v2\target\release\deps\openblas_build-136009864315e8a8.d: C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\lib.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\build.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\check.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\download.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\error.rs
+
+C:\esp-projects\v2\target\release\deps\libopenblas_build-136009864315e8a8.rlib: C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\lib.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\build.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\check.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\download.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\error.rs
+
+C:\esp-projects\v2\target\release\deps\libopenblas_build-136009864315e8a8.rmeta: C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\lib.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\build.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\check.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\download.rs C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\error.rs
+
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\lib.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\build.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\check.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\download.rs:
+C:\Users\Павел\.cargo\registry\src\index.crates.io-1949cf8c6b5b557f\openblas-build-0.10.15\src\error.rs:
